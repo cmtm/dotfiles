@@ -22,12 +22,19 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'kien/ctrlp.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'tomasr/molokai'
+
+
 
 filetype plugin indent on     " required!
 
 set t_Co=256
 syntax on
-colorscheme wombat256
+let g:rehash256 = 1
+
+colorscheme molokai
+"set background=dark
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set backup		" keep a backup file
@@ -42,6 +49,7 @@ noremap Q gq
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
+inoremap kj <Esc>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -50,7 +58,7 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-
+	autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 	" Put these in an autocmd group, so that we can delete them easily.
 	augroup vimrcEx
 		au!
@@ -105,9 +113,11 @@ set ignorecase
 set incsearch		" do incremental searching
 set showmatch
 set smartcase
+set smartindent
 set hidden
 set nowrap
 set tabstop=4
+set shiftwidth=4
 set tags=tags;~,~/commontags
 
 " Disable output and VCS files
@@ -200,4 +210,4 @@ if exists("+undofile")
 endif
 
 
-
+map <F8> : !/home/chris/Jess71p2/bin/jess % <cr>

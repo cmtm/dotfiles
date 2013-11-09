@@ -23,6 +23,7 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 ## Modified commands ## {{{
+alias vi='vim'
 alias diff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'
 alias more='less'
@@ -104,5 +105,3 @@ alias pacimpl="/usr/bin/pacman -D --asdep"	# 'mark as [impl]icit'	- mark one or 
 # '[r]emove [o]rphans' - recursively remove ALL orphaned packages
 alias pacro="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rs \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
 # }}}
-
-. $HOME/.bashrc.load
