@@ -20,8 +20,8 @@ Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'kien/ctrlp.vim'
-Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'sukima/xmledit'
 Bundle 'tomasr/molokai'
 
 
@@ -113,7 +113,6 @@ set ignorecase
 set incsearch		" do incremental searching
 set showmatch
 set smartcase
-set smartindent
 set hidden
 set nowrap
 set tabstop=4
@@ -131,7 +130,7 @@ nnoremap Y y$
 nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
 set gdefault
-set clipboard=unnamedplus
+set clipboard=unnamed
 nnoremap <leader><space> :noh<cr>
 " following 3 maps replaced by smooth scroll
 " nnoremap <space> <C-d>
@@ -209,5 +208,4 @@ if exists("+undofile")
   set undofile
 endif
 
-
-map <F8> : !/home/chris/Jess71p2/bin/jess % <cr>
+nnoremap ftd yiwgg22jotypedef int pa;:w
