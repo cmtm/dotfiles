@@ -42,6 +42,7 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 
+set foldmethod=syntax
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
@@ -130,7 +131,7 @@ nnoremap Y y$
 nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
 set gdefault
-set clipboard=unnamed
+set clipboard=unnamedplus
 nnoremap <leader><space> :noh<cr>
 " following 3 maps replaced by smooth scroll
 " nnoremap <space> <C-d>
@@ -161,10 +162,15 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1, 8)<CR>
 
 runtime macros/matchit.vim
 
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+set splitbelow
+set splitright
+
+map <c-j> <c-w><c-w>
+map <c-k> <c-w><s-w>
+map <c-l> :vertical resize -7<CR>
+map <c-h> :vertical resize +7<CR>
+nnoremap <s-h> <C-w><
+nnoremap <s-l> <C-w>>
 
 
 
