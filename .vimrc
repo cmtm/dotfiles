@@ -15,12 +15,12 @@ Bundle 'gmarik/vundle'
 "
 " original repos on github
 Bundle 'Lokaltog/vim-easymotion'
-
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'mbbill/undotree'
 Bundle 'sukima/xmledit'
 Bundle 'tomasr/molokai'
 
@@ -38,11 +38,15 @@ colorscheme molokai
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set backup		" keep a backup file
-set history=50		" keep 50 lines of command line history
+set history=1000	" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 
+set confirm
+
 set foldmethod=syntax
+set foldcolumn=2
+set nofoldenable
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
@@ -108,7 +112,8 @@ set cursorline
 set ttyfast
 set laststatus=2
 set undofile
-set scrolloff=10
+set scrolloff=7
+set sidescrolloff=5
 set relativenumber
 set ignorecase
 set incsearch		" do incremental searching
@@ -116,14 +121,24 @@ set showmatch
 set smartcase
 set hidden
 set nowrap
+set expandtab
 set tabstop=4
 set shiftwidth=4
+set smarttab
+set shiftround
 set tags=tags;~,~/commontags
+
+set nrformats-=octal
+
+set laststatus=2
 
 " Disable output and VCS files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
 " Disable archive files
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+
+nnoremap <F8> :TagbarToggle<CR> 
+nnoremap <F5> :UndotreeToggle<cr>
 
 nnoremap j gj
 nnoremap k gk

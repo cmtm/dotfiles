@@ -1,3 +1,8 @@
 [user]
 	email = chris.morin2@gmail.com
 	name = Chris Morin
+[merge]
+	tool = vimdiff
+[alias]
+    co = checkout
+    br = branch
