@@ -14,7 +14,9 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "
 " original repos on github
+Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -24,8 +26,6 @@ Bundle 'mbbill/undotree'
 Bundle 'sukima/xmledit'
 Bundle 'tomasr/molokai'
 
-
-
 filetype plugin indent on     " required!
 
 set t_Co=256
@@ -34,11 +34,13 @@ let g:rehash256 = 1
 
 colorscheme molokai
 "set background=dark
+"
+let g:tagbar_sort = 0
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set backup		" keep a backup file
-set history=1000	" keep 50 lines of command line history
+set history=1000
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 
@@ -107,11 +109,11 @@ augroup CursorLine
 	au WinLeave * setlocal nocursorcolumn
 augroup END
 set wildmenu
-set wildmode=list:longest
+set wildignorecase
+set wildmode=longest,list:longest
 set cursorline
 set ttyfast
 set laststatus=2
-set undofile
 set scrolloff=7
 set sidescrolloff=5
 set relativenumber
@@ -121,12 +123,15 @@ set showmatch
 set smartcase
 set hidden
 set nowrap
+set gdefault
 set expandtab
 set tabstop=4
 set shiftwidth=4
 set smarttab
 set shiftround
-set tags=tags;~,~/commontags
+set clipboard=unnamedplus
+
+set tags=./tags;/,~/commontags
 
 set nrformats-=octal
 
@@ -145,9 +150,8 @@ nnoremap k gk
 nnoremap Y y$
 nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
-set gdefault
-set clipboard=unnamedplus
 nnoremap <leader><space> :noh<cr>
+nnoremap <leader>l :/\%>80v.\+<cr>
 " following 3 maps replaced by smooth scroll
 " nnoremap <space> <C-d>
 " nnoremap <S-Space> <C-u>
@@ -228,5 +232,3 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
-
-nnoremap ftd yiwgg22jotypedef int pa;:w
