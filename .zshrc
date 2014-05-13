@@ -56,6 +56,7 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:.:/home/chris/bin:/home/chris/shorts"
 # export MANPATH="/usr/local/man:$MANPATH"
+export KEYTIMEOUT=1
 
 # # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
