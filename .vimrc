@@ -122,7 +122,7 @@ set incsearch		" do incremental searching
 set showmatch
 set smartcase
 set hidden
-set nowrap
+" set nowrap
 set gdefault
 " set expandtab
 set tabstop=4
