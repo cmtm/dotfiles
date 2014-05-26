@@ -14,6 +14,9 @@ alias vi="vim"
 alias mkdir="mkdir -p -v"
 alias info="info --vi-keys"
 
+export m18=chrmorin@ott-mcp-bld-18
+export m32=chrmorin@ott-mcp-bld-32
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 

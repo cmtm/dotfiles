@@ -16,7 +16,7 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -129,9 +129,9 @@ set tabstop=4
 set shiftwidth=4
 set smarttab
 set shiftround
-set clipboard=unnamedplus
+set clipboard=unnamedplus,autoselect
 
-set tags=./tags;/,~/commontags
+set tags=./tags;/,~/lc/tags
 
 set nrformats-=octal
 
