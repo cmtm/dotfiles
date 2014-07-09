@@ -12,5 +12,3 @@
     lg=log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     dt=difftool --no-prompt
     dd=difftool --dir-diff
-[oh-my-zsh]
-	hide-status = 1

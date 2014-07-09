@@ -1,3 +1,4 @@
+runtime! archlinux.vim
 let mapleader="\<cr>"
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -39,10 +40,10 @@ let g:tagbar_sort = 0
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-set backup		" keep a backup file
+set backup        " keep a backup file
 set history=1000
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+set ruler        " show the cursor position all the time
+set showcmd        " display incomplete commands
 
 set confirm
 
@@ -56,38 +57,38 @@ noremap Q gq
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
-inoremap kj <Esc>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-	set mouse=a
+    set mouse=a
 endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-	autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-	" Put these in an autocmd group, so that we can delete them easily.
-	augroup vimrcEx
-		au!
-
-		" For all text files set 'textwidth' to 78 characters.
-		autocmd FileType text setlocal textwidth=78
-
-		" When editing a file, always jump to the last known cursor position.
-		" Don't do it when the position is invalid or when inside an event handler
-		" (happens when dropping a file on gvim).
-		" Also don't do it when the mark is in the first line, that is the default
-		" position when opening a file.
-		autocmd BufReadPost *
-					\ if line("'\"") > 1 && line("'\"") <= line("$") |
-					\   exe "normal! g`\"" |
-					\ endif
-
-	augroup END
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup vimrcEx
+        au!
+        " When editing a file, always jump to the last known cursor position.
+        " Don't do it when the position is invalid or when inside an event handler
+        " (happens when dropping a file on gvim).
+        " Also don't do it when the mark is in the first line, that is the default
+        " position when opening a file.
+        autocmd BufReadPost *
+                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                    \   exe "normal! g`\"" |
+                    \ endif
+    augroup END
+    augroup CursorLine
+        au!
+        au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+        au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+        au WinLeave * setlocal nocursorline
+        au WinLeave * setlocal nocursorcolumn
+    augroup END
 
 else
 
-	set autoindent		" always set autoindenting on
+    set autoindent        " always set autoindenting on
 
 endif " has("autocmd")
 
@@ -95,36 +96,30 @@ endif " has("autocmd")
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-	command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-				\ | wincmd p | diffthis
+    command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+                \ | wincmd p | diffthis
 endif
 
 
 " My stuff
-augroup CursorLine
-	au!
-	au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-	au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-	au WinLeave * setlocal nocursorline
-	au WinLeave * setlocal nocursorcolumn
-augroup END
 set wildmenu
 set wildignorecase
 set wildmode=longest,list:longest
 set cursorline
+set virtualedit=block
 set ttyfast
 set laststatus=2
 set scrolloff=7
 set sidescrolloff=5
 set relativenumber
 set ignorecase
-set incsearch		" do incremental searching
+set incsearch        " do incremental searching
 set showmatch
 set smartcase
 set hidden
 " set nowrap
 set gdefault
-" set expandtab
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set smarttab
@@ -148,7 +143,8 @@ nnoremap <F5> :UndotreeToggle<cr>
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+nnoremap <silent> <leader>tw :set wrap!<CR>:set wrap?<CR>
+nnoremap <silent> <leader>N  :set relativenumber!<CR>
 nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>l :/\%>80v.\+<cr>
@@ -158,14 +154,14 @@ nnoremap <leader>l :/\%>80v.\+<cr>
 " nnoremap <BS> <C-u>
 
 if has("statusline") && !&cp 
-	set laststatus=2 " always show the status bar
+    set laststatus=2 " always show the status bar
 
-	" Start the status line
-	set statusline=%f\ %m\ %r 
-	set statusline+=Line:%l/%L[%p%%] 
-	set statusline+=Col:%v 
-	set statusline+=Buf:#%n 
-	set statusline+=[%b][0x%B] 
+    " Start the status line
+    set statusline=%f\ %m\ %r 
+    set statusline+=Line:%l/%L[%p%%] 
+    set statusline+=Col:%v 
+    set statusline+=Buf:#%n 
+    set statusline+=[%b][0x%B] 
 endif
 
 
@@ -197,7 +193,7 @@ nnoremap <s-l> <C-w>>
 " If you have .vim-backup in the current directory, it'll use that.
 " Otherwise it saves it to ~/.vim/backup or . if all else fails.
 if isdirectory($HOME . '/.vim/backup') == 0
-  :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+    :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
 endif
 set backupdir-=.
 set backupdir+=.
