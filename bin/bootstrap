@@ -4,5 +4,5 @@ git clone http://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 mkdir -p ~/.config
 git clone https://github.com/cmtm/awesome-copycats.git ~/.config/awesome
 
-dfm install
+`pwd`/dfm install
 
