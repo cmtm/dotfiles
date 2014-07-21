@@ -1,1 +1,9 @@
 README.md skip
+
+.oh-my-zsh recurse
+.oh-my-zsh/plugins recurse
+.oh-my-zsh/themes recurse
+
+.config
+.config/awesome
+
