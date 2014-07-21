@@ -1,0 +1,112 @@
+[options]
+resize_grip = false
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+visible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = inconsolata-g 10
+scrollback_lines = 12000
+search_wrap = true
+#icon_name = terminal
+#geometry = 640x480
+
+# 0.0: opaque, 1.0: transparent
+transparency = 0.0
+pseudo_transparency = false
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# $BROWSER is used by default
+browser = google-chrome
+
+# word characters used for word selection
+# (default if unset: all graphic non-punctuation/space characters)
+#word_chars = -A-Za-z0-9,./?%&#:_=+@~
+
+# set size hints for the window
+#size_hints = false
+[colors]
+foreground = #839496
+foreground_bold = #fdf6e3
+#foreground_dim = #888888
+background = #002b36
+cursor = #93a1a1
+
+# if unset, will reverse foreground and background
+#highlight = #839496
+
+# colors from color0 to color254 can be set
+color0 = #073642
+color1 = #dc322f
+color2 = #859900
+color3 = #b58900
+color4 = #268bd2
+color5 = #d33682
+color6 = #2aa198
+color7 = #eee8d5
+color8 = #002b36
+color9 = #cb4b16
+color10 = #586e75
+color11 = #657b83
+color12 = #839496
+color13 = #6c71c4
+color14 = #93a1a1
+color15 = #fdf6e3
+# # Molokai theme
+# background = #1B1D1E
+# foreground = #F8F8F2
+# foreground_bold = #ffffff
+# cursor = #FF0000
+# # Black         0;30
+# color0 = #1B1D1E
+# # Red           0;31
+# color1 = #B60050
+# # Green         0;32
+# color2 = #88BB22
+# # Brown         0;33
+# color3 = #C47F2C
+# # Blue          0;34
+# color4 = #30309B
+# # Purple        0;35
+# color5 = #7E40A5
+# # Cyan          0;36
+# color6 = #4699AF
+# # Light Gray    0;37
+# color7 = #9999AA
+# 
+# # Dark Gray     1;30
+# color8 = #303030
+# # Light Red     1;31
+# color9 = #F92672
+# # Light Green   1;32
+# color10 = #80FF00
+# # Yellow        1;33
+# color11 = #FFBA68
+# # Light Blue    1;34
+# color12 = #7070F0
+# # Light Purple  1;35
+# color13 = #BB88DD
+# # Light Cyan    1;36
+# color14 = #66D9EF
+# # White         1;37
+# color15 = #F8F8F2
+
+[hints]
+#font = Monospace 12
+#foreground = #dcdccc
+#background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 0.5
+#roundness = 2.0
+
+# vim: ft=dosini
