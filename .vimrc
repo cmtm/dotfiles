@@ -17,7 +17,6 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'Valloric/YouCompleteMe'
 Bundle 'majutsushi/tagbar'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -25,6 +24,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'mbbill/undotree'
 Bundle 'sukima/xmledit'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'tomasr/molokai'
 
 filetype plugin indent on     " required!
@@ -33,7 +33,8 @@ set t_Co=256
 syntax on
 let g:rehash256 = 1
 
-colorscheme molokai
+set background=dark
+colorscheme solarized
 "set background=dark
 "
 let g:tagbar_sort = 0
@@ -62,6 +63,17 @@ inoremap <C-U> <C-G>u<C-U>
 if has('mouse')
     set mouse=a
 endif
+
+" Remove delay when leaving insert move
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -130,8 +142,6 @@ set tags=./tags;/,~/lc/tags
 
 set nrformats-=octal
 
-set laststatus=2
-
 " Disable output and VCS files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
 " Disable archive files
@@ -152,18 +162,6 @@ nnoremap <leader>l :/\%>80v.\+<cr>
 " nnoremap <space> <C-d>
 " nnoremap <S-Space> <C-u>
 " nnoremap <BS> <C-u>
-
-if has("statusline") && !&cp 
-    set laststatus=2 " always show the status bar
-
-    " Start the status line
-    set statusline=%f\ %m\ %r 
-    set statusline+=Line:%l/%L[%p%%] 
-    set statusline+=Col:%v 
-    set statusline+=Buf:#%n 
-    set statusline+=[%b][0x%B] 
-endif
-
 
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1, 4)<CR>
 noremap <silent> <S-space> :call smooth_scroll#up(&scroll, 1, 4)<CR>
