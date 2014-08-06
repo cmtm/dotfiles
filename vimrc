@@ -164,25 +164,25 @@ nnoremap <leader>l :/\%>80v.\+<cr>
 " nnoremap <S-Space> <C-u>
 " nnoremap <BS> <C-u>
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1, 4)<CR>
-noremap <silent> <S-space> :call smooth_scroll#up(&scroll, 1, 4)<CR>
-noremap <silent> <BS> :call smooth_scroll#up(&scroll, 1, 4)<CR>
+nnoremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1, 4)<CR>
+nnoremap <silent> <S-space> :call smooth_scroll#up(&scroll, 1, 4)<CR>
+nnoremap <silent> <BS> :call smooth_scroll#up(&scroll, 1, 4)<CR>
 
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 1, 4)<CR>
-noremap <silent> <space> :call smooth_scroll#down(&scroll, 1, 4)<CR>
+nnoremap <silent> <c-d> :call smooth_scroll#down(&scroll, 1, 4)<CR>
+nnoremap <silent> <space> :call smooth_scroll#down(&scroll, 1, 4)<CR>
 
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 1, 8)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1, 8)<CR>
+nnoremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 1, 8)<CR>
+nnoremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1, 8)<CR>
 
 runtime macros/matchit.vim
 
 set splitbelow
 set splitright
 
-map <c-j> <c-w><c-w>
-map <c-k> <c-w><s-w>
-map <c-l> :vertical resize -7<CR>
-map <c-h> :vertical resize +7<CR>
+noremap <c-j> <c-w><c-w>
+noremap <c-k> <c-w><s-w>
+noremap <c-l> :vertical resize -7<CR>
+noremap <c-h> :vertical resize +7<CR>
 nnoremap <s-h> <C-w><
 nnoremap <s-l> <C-w>>
 
