@@ -60,8 +60,8 @@ os.setlocale(os.getenv("LANG"))
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/multicolor/theme.lua")
 
 -- common
-modkey     = "Mod4"
-altkey     = "Mod1"
+modkey     = "Mod1"
+altkey     = "Mod4"
 terminal   = "termite" or "urxvt"
 editor     = os.getenv("EDITOR") or "vi"or "nano" 
 editor_cmd = terminal .. " -e " .. editor
@@ -398,14 +398,36 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
 
     -- Default client focus
-    awful.key({ modkey }, "j",
+    awful.key({ altkey }, "k",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "k",
+    awful.key({ altkey }, "j",
         function ()
             awful.client.focus.byidx(-1)
+            if client.focus then client.focus:raise() end
+        end),
+
+    -- By direction client focus
+    awful.key({ modkey }, "j",
+        function()
+            awful.client.focus.bydirection("down")
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey }, "k",
+        function()
+            awful.client.focus.bydirection("up")
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey }, "h",
+        function()
+            awful.client.focus.bydirection("left")
+            if client.focus then client.focus:raise() end
+        end),
+    awful.key({ modkey }, "l",
+        function()
+            awful.client.focus.bydirection("right")
             if client.focus then client.focus:raise() end
         end),
 
@@ -434,8 +456,8 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    awful.key({ modkey }, "l",      function () awful.tag.incmwfact( 0.05)     end),
-    awful.key({ modkey }, "h",      function () awful.tag.incmwfact(-0.05)     end),
+    awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
+    awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
     awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
     awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
     awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
@@ -622,9 +644,9 @@ awful.rules.rules = {
 -- }}}
 
 -- {{{ Signals
--- Signal function to execute when a new client appears.
+-- signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
-    -- Enable sloppy focus
+    -- enable sloppy focus
     c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
@@ -637,16 +659,53 @@ client.connect_signal("manage", function (c, startup)
         awful.placement.no_overlap(c)
         awful.placement.no_offscreen(c)
     end
+
+    local titlebars_enabled = false
+    if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
+        -- buttons for the titlebar
+        local buttons = awful.util.table.join(
+                awful.button({ }, 1, function()
+                    client.focus = c
+                    c:raise()
+                    awful.mouse.client.move(c)
+                end),
+                awful.button({ }, 3, function()
+                    client.focus = c
+                    c:raise()
+                    awful.mouse.client.resize(c)
+                end)
+                )
+
+        -- widgets that are aligned to the right
+        local right_layout = wibox.layout.fixed.horizontal()
+        right_layout:add(awful.titlebar.widget.floatingbutton(c))
+        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
+        right_layout:add(awful.titlebar.widget.stickybutton(c))
+        right_layout:add(awful.titlebar.widget.ontopbutton(c))
+        right_layout:add(awful.titlebar.widget.closebutton(c))
+
+        -- the title goes in the middle
+        local middle_layout = wibox.layout.flex.horizontal()
+        local title = awful.titlebar.widget.titlewidget(c)
+        title:set_align("center")
+        middle_layout:add(title)
+        middle_layout:buttons(buttons)
+
+        -- now bring it all together
+        local layout = wibox.layout.align.horizontal()
+        layout:set_right(right_layout)
+        layout:set_middle(middle_layout)
+
+        awful.titlebar(c,{size=16}):set_widget(layout)
+    end
 end)
 
 -- No border for maximized clients
 client.connect_signal("focus",
     function(c)
         if c.maximized_horizontal == true and c.maximized_vertical == true then
-            c.border_width = 0
             c.border_color = beautiful.border_normal
         else
-            c.border_width = beautiful.border_width
             c.border_color = beautiful.border_focus
         end
     end)
