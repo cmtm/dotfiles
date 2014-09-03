@@ -1,3 +1,4 @@
+ForwardX11Trusted yes
 Host b32
     HostName ott-mcp-bld-32
     User chrmorin

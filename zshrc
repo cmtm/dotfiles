@@ -6,6 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
+#ZSH_THEME="powerline"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -13,6 +14,7 @@ ZSH_THEME="agnoster"
 alias vi="vim"
 alias mkdir="mkdir -p -v"
 alias info="info --vi-keys"
+alias trsh='mv --target-directory=$HOME/trash'
 
 export m18=chrmorin@ott-mcp-bld-18
 export m32=chrmorin@ott-mcp-bld-32
@@ -51,7 +53,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras archlinux fasd common-aliases python systemd colored-man vi-mode)
+plugins=(archlinux git git-extras fasd colored-man common-aliases python systemd sudo last-working-dir vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 

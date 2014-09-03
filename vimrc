@@ -10,12 +10,12 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 "
 " original repos on github
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'majutsushi/tagbar'
 Plugin 'terryma/vim-smooth-scroll'
@@ -24,6 +24,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'mbbill/undotree'
 Plugin 'sukima/xmledit'
+Plugin 'xolox/vim-lua-ftplugin'
+Plugin 'xolox/vim-misc'
 Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
@@ -76,9 +78,7 @@ if ! has('gui_running')
 endif
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
-" Only do this part when compiled with support for autocommands.
 if has("autocmd")
-    " Put these in an autocmd group, so that we can delete them easily.
     augroup vimrcEx
         au!
         " When editing a file, always jump to the last known cursor position.
@@ -100,9 +100,7 @@ if has("autocmd")
     augroup END
 
 else
-
     set autoindent        " always set autoindenting on
-
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -139,7 +137,7 @@ set smarttab
 set shiftround
 set clipboard=unnamedplus,autoselect
 
-set tags=./tags;/,~/lc/tags
+set tags=./tags;/,tags,~/lc/tags
 
 set nrformats-=octal
 
