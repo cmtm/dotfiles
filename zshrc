@@ -59,11 +59,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:.:/home/chris/bin:/home/chris/shorts"
 # export MANPATH="/usr/local/man:$MANPATH"
 export KEYTIMEOUT=1
 
-export EDITOR='vim'
 # colors for ls
 if [[ -f ~/.dir_colors ]] ; then
     eval $(dircolors -b ~/.dir_colors)

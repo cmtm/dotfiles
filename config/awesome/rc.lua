@@ -9,7 +9,7 @@
 local gears     = require("gears")
 local awful     = require("awful")
 awful.rules     = require("awful.rules")
-require("awful.autofocus")
+                  require("awful.autofocus")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local naughty   = require("naughty")
@@ -83,7 +83,7 @@ local layouts = {
 tags = {}
 for s = 1, screen.count() do
 -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+   tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
 -- }}}
 
@@ -96,7 +96,8 @@ end
 -- }}}
 
 -- {{{ Freedesktop Menu
-require("freedesktop/freedesktop")
+mymainmenu = awful.menu.new({ items = require("menugen").build_menu(),
+                              theme = { height = 16, width = 130 }})
 -- }}}
 
 -- {{{ Wibox
@@ -310,9 +311,9 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the upper wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 }) 
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 })
     --border_width = 0, height =  20 })
-        
+
     -- Widgets that are aligned to the upper left
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mytaglist[s])
@@ -351,20 +352,20 @@ for s = 1, screen.count() do
     layout:set_left(left_layout)
     --layout:set_middle(mytasklist[s])
     layout:set_right(right_layout)
-    
+
     mywibox[s]:set_widget(layout)
 
     -- Create the bottom wibox
     mybottomwibox[s] = awful.wibox({ position = "bottom", screen = s, border_width = 0, height = 20 })
     --mybottomwibox[s].visible = false
-            
+
     -- Widgets that are aligned to the bottom left
     bottom_left_layout = wibox.layout.fixed.horizontal()
-                        
+
     -- Widgets that are aligned to the bottom right
     bottom_right_layout = wibox.layout.fixed.horizontal()
     bottom_right_layout:add(mylayoutbox[s])
-                                            
+
     -- Now bring it all together (with the tasklist in the middle)
     bottom_layout = wibox.layout.align.horizontal()
     bottom_layout:set_left(bottom_left_layout)
@@ -504,22 +505,22 @@ globalkeys = awful.util.table.join(
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
         function ()
-            awful.util.spawn_with_shell("mpc toggle || ncmpcpp toggle || ncmpc toggle || pms toggle")
+            awful.util.spawn_with_shell("mpc toggle || ncmpc toggle || pms toggle")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Down",
         function ()
-            awful.util.spawn_with_shell("mpc stop || ncmpcpp stop || ncmpc stop || pms stop")
+            awful.util.spawn_with_shell("mpc stop || ncmpc stop || pms stop")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Left",
         function ()
-            awful.util.spawn_with_shell("mpc prev || ncmpcpp prev || ncmpc prev || pms prev")
+            awful.util.spawn_with_shell("mpc prev || ncmpc prev || pms prev")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Right",
         function ()
-            awful.util.spawn_with_shell("mpc next || ncmpcpp next || ncmpc next || pms next")
+            awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
             mpdwidget.update()
         end),
 
@@ -724,7 +725,7 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
                     c.border_width = 0
                 elseif awful.client.floating.get(c) or layout == "floating" then
                     c.border_width = beautiful.border_width
-                elseif #clients == 1 then 
+                elseif #clients == 1 then
                     clients[1].border_width = 0
                     if layout ~= "max" then
                         awful.client.moveresize(0, 0, 2, 0, clients[1])
