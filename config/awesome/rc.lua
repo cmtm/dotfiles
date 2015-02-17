@@ -184,6 +184,7 @@ volumewidget = lain.widgets.alsa({
         if volume_now.status == "off" then
             volume_now.level = volume_now.level .. "M"
         end
+
         widget:set_markup(markup("#7493d2", volume_now.level .. "% "))
     end
 })
@@ -196,6 +197,12 @@ netupicon = wibox.widget.imagebox(beautiful.widget_netup)
 --netupicon.align = "middle"
 netupinfo = lain.widgets.net({
     settings = function()
+        if iface ~= "network off" and
+           string.match(yawn.widget._layout.text, "N/A")
+        then
+            yawn.fetch_weather()
+        end
+
         widget:set_markup(markup("#e54c62", net_now.sent .. " "))
         netdowninfo:set_markup(markup("#87af5f", net_now.received .. " "))
     end
