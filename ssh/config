@@ -5,4 +5,7 @@ Host b32
 Host ar
     HostName ott-mcp-bld-lnx-10
     User chrmorin
+Host b60
+    HostName ott-mcp-bld-60
+    User chrmorin
 
