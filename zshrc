@@ -15,6 +15,7 @@ alias vi="vim"
 alias mkdir="mkdir -p -v"
 alias info="info --vi-keys"
 alias trsh='mv --target-directory=$HOME/trash'
+alias ss="ssh b60"
 
 export m18=chrmorin@ott-mcp-bld-18
 export m32=chrmorin@ott-mcp-bld-32
