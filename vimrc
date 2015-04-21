@@ -37,7 +37,8 @@ syntax on
 let g:rehash256 = 1
 
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+colorscheme slate
 "set background=dark
 "
 let g:tagbar_sort = 0
@@ -91,14 +92,6 @@ if has("autocmd")
                     \   exe "normal! g`\"" |
                     \ endif
     augroup END
-    augroup CursorLine
-        au!
-        au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-        au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
-        au WinLeave * setlocal nocursorline
-        au WinLeave * setlocal nocursorcolumn
-    augroup END
-
 else
     set autoindent        " always set autoindenting on
 endif " has("autocmd")
@@ -116,7 +109,6 @@ endif
 set wildmenu
 set wildignorecase
 set wildmode=longest,list:longest
-set cursorline
 set virtualedit=block
 set ttyfast
 set laststatus=2
@@ -131,7 +123,7 @@ set hidden
 " set nowrap
 set gdefault
 set expandtab
-set tabstop=4
+set tabstop=8
 set shiftwidth=4
 set smarttab
 set shiftround
