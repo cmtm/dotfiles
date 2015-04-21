@@ -107,7 +107,6 @@ endif
 
 " My stuff
 set wildmenu
-set wildignorecase
 set wildmode=longest,list:longest
 set virtualedit=block
 set ttyfast
@@ -127,7 +126,6 @@ set tabstop=8
 set shiftwidth=4
 set smarttab
 set shiftround
-set clipboard=unnamedplus,autoselect
 
 set tags=./tags;/,tags,~/lc/tags
 
