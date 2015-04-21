@@ -1,10 +1,10 @@
 [user]
-	email = chris.morin2@gmail.com
-	name = Chris Morin
+    email = chris.morin2@gmail.com
+    name = Chris Morin
 [diff]
-	tool = meld
+    tool = meld
 [merge]
-	tool = meld
+    tool = meld
 [alias]
     co = checkout
     br = branch
