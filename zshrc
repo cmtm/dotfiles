@@ -20,6 +20,11 @@ alias ss="ssh b60"
 export m18=chrmorin@ott-mcp-bld-18
 export m32=chrmorin@ott-mcp-bld-32
 
+export http_proxy=http://proxy-wsa.esl.cisco.com:80
+export https_proxy=https://proxy-wsa.esl.cisco.com:80
+export no_proxy="localhost,127.0.0.1"
+
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
