@@ -52,7 +52,6 @@ set showcmd        " display incomplete commands
 set confirm
 
 set foldmethod=syntax
-set foldcolumn=2
 set nofoldenable
 
 " Don't use Ex mode, use Q for formatting
@@ -128,10 +127,10 @@ set incsearch        " do incremental searching
 set showmatch
 set smartcase
 set hidden
-" set nowrap
+set nowrap
 set gdefault
 set expandtab
-set tabstop=4
+set tabstop=8
 set shiftwidth=4
 set smarttab
 set shiftround

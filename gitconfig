@@ -3,8 +3,11 @@
     name = Chris Morin
 [diff]
     tool = meld
+    renamelimit=9999999
 [merge]
     tool = meld
+    renamelimit=9999999
+    conflictstyle = diff3
 [alias]
     co = checkout
     br = branch
@@ -15,7 +18,7 @@
     dd=difftool --dir-diff
     graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 [push]
-    default = matching
+    default = simple
 [http]
     sslVerify = false
 [url "http://"]

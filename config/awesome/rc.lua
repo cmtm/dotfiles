@@ -49,12 +49,10 @@ function run_once(cmd)
 end
 
 run_once("urxvtd")
-run_once("unclutter")
+run_once("unclutter -root")
 -- }}}
 
 -- {{{ Variable definitions
--- localization
-os.setlocale(os.getenv("LANG"))
 
 -- beautiful init
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/multicolor/theme.lua")
@@ -105,7 +103,19 @@ markup      = lain.util.markup
 
 -- Textclock
 clockicon = wibox.widget.imagebox(beautiful.widget_clock)
-mytextclock = awful.widget.textclock(markup("#7788af", "%A %d %B ") .. markup("#343639", ">") .. markup("#de5e1e", " %H:%M "))
+--mytextclock = awful.widget.textclock(markup("#7788af", "%A %d %B ") .. markup("#343639", ">") .. markup("#de5e1e", " %H:%M "))
+mytextclock = lain.widgets.abase({
+    timeout  = 60,
+    cmd      = "date +'%A %d %B %R'",
+    settings = function()
+        local t_output = ""
+        local o_it = string.gmatch(output, "%S+")
+
+        for i=1,3 do t_output = t_output .. " " .. o_it(i) end
+
+        widget:set_markup(markup("#7788af", t_output) .. markup("#343639", " > ") .. markup("#de5e1e", o_it(1)) .. " ")
+    end
+})
 
 -- Calendar
 lain.widgets.calendar:attach(mytextclock, { font_size = 10 })
@@ -189,7 +199,7 @@ volumewidget = lain.widgets.alsa({
     end
 })
 
--- Net 
+-- Net
 netdownicon = wibox.widget.imagebox(beautiful.widget_netdown)
 --netdownicon.align = "middle"
 netdowninfo = wibox.widget.textbox()
@@ -298,11 +308,11 @@ mytasklist.buttons = awful.util.table.join(
                                           end))
 
 for s = 1, screen.count() do
-    
+
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
 
-    
+
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
     mylayoutbox[s]:buttons(awful.util.table.join(
@@ -490,23 +500,23 @@ globalkeys = awful.util.table.join(
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function ()
-            awful.util.spawn(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel))
+            os.execute(string.format("amixer -c %s set %s 1+", volumewidget.card, volumewidget.channel))
             volumewidget.update()
         end),
     awful.key({ altkey }, "Down",
         function ()
-            awful.util.spawn(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel))
+            os.execute(string.format("amixer -c %s set %s 1-", volumewidget.card, volumewidget.channel))
             volumewidget.update()
         end),
     awful.key({ altkey }, "m",
         function ()
-            awful.util.spawn(string.format("amixer -c %s set %s toggle", volumewidget.card, volumewidget.channel))
-            --awful.util.spawn(string.format("amixer set %s toggle", volumewidget.channel))
+            os.execute(string.format("amixer -c %s set %s toggle", volumewidget.card, volumewidget.channel))
+            --os.execute(string.format("amixer set %s toggle", volumewidget.channel))
             volumewidget.update()
         end),
     awful.key({ altkey, "Control" }, "m",
         function ()
-            awful.util.spawn(string.format("amixer -c %s set %s 100%%", volumewidget.card, volumewidget.channel))
+            os.execute(string.format("amixer -c %s set %s 100%%", volumewidget.card, volumewidget.channel))
             volumewidget.update()
         end),
 
@@ -573,10 +583,11 @@ clientkeys = awful.util.table.join(
 )
 
 -- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
+-- be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
+        -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
                         local screen = mouse.screen
@@ -585,6 +596,7 @@ for i = 1, 9 do
                            awful.tag.viewonly(tag)
                         end
                   end),
+        -- Toggle tag.
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
                       local screen = mouse.screen
@@ -593,18 +605,24 @@ for i = 1, 9 do
                          awful.tag.viewtoggle(tag)
                       end
                   end),
+        -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.movetotag(tag)
+                      if client.focus then
+                          local tag = awful.tag.gettags(client.focus.screen)[i]
+                          if tag then
+                              awful.client.movetotag(tag)
+                          end
                      end
                   end),
+        -- Toggle tag.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.toggletag(tag)
+                      if client.focus then
+                          local tag = awful.tag.gettags(client.focus.screen)[i]
+                          if tag then
+                              awful.client.toggletag(tag)
+                          end
                       end
                   end))
 end
@@ -654,20 +672,19 @@ awful.rules.rules = {
 
 -- {{{ Signals
 -- signal function to execute when a new client appears.
+local sloppyfocus_last = {c=nil}
 client.connect_signal("manage", function (c, startup)
-    -- enable sloppy focus
-    c:connect_signal("mouse::enter", function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+    -- Enable sloppy focus
+    client.connect_signal("mouse::enter", function(c)
+         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
-            client.focus = c
-        end
-    end)
-
-    if not startup and not c.size_hints.user_position
-       and not c.size_hints.program_position then
-        awful.placement.no_overlap(c)
-        awful.placement.no_offscreen(c)
-    end
+             -- Skip focusing the client if the mouse wasn't moved.
+             if c ~= sloppyfocus_last.c then
+                 client.focus = c
+                 sloppyfocus_last.c = c
+             end
+         end
+     end)
 
     local titlebars_enabled = false
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
