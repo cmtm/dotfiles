@@ -23,3 +23,5 @@
     sslVerify = false
 [url "http://"]
     insteadOf = git://
+[pull]
+	ff = only
