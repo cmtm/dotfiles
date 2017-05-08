@@ -41,6 +41,7 @@ colorscheme solarized
 "set background=dark
 "
 let g:tagbar_sort = 0
+let g:powerline_pycmd = "py3"
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
