@@ -1,7 +1,3 @@
-if [ ! -d ~/.config/awesome ]; then
-    git clone http://github.com/copycat-killer/awesome-copycats ~/.config/awesome
-fi
-
 if [ ! -d ~/.oh-my-zsh ]; then
     git clone http://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
 fi
