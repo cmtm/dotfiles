@@ -15,18 +15,16 @@ Plugin 'gmarik/Vundle.vim'
 " My Bundles here:
 "
 " original repos on github
-" Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
 Plugin 'majutsushi/tagbar'
 Plugin 'terryma/vim-smooth-scroll'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'mileszs/ack.vim'
 Plugin 'mbbill/undotree'
 Plugin 'sukima/xmledit'
-Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-misc'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'embear/vim-localvimrc'
 
 call vundle#end()
 
@@ -52,7 +50,7 @@ set showcmd        " display incomplete commands
 
 set confirm
 
-set foldmethod=syntax
+set foldmethod=indent
 set nofoldenable
 
 " Don't use Ex mode, use Q for formatting
@@ -122,7 +120,7 @@ set ttyfast
 set laststatus=2
 set scrolloff=7
 set sidescrolloff=5
-set relativenumber
+set number
 set ignorecase
 set incsearch        " do incremental searching
 set showmatch
@@ -138,6 +136,7 @@ set shiftround
 set clipboard=unnamedplus,autoselect
 
 set tags=./tags;/,tags,~/lc/tags
+set path=.
 
 set nrformats-=octal
 
@@ -210,6 +209,8 @@ set directory+=~/.vim/swap//
 set directory+=~/tmp//
 set directory+=.
 
+autocmd SwapExists * let v:swapchoice = "o"
+
 " viminfo stores the the state of your previous editing session
 set viminfo+=n~/.vim/viminfo
 
@@ -225,3 +226,6 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
+
+let g:localvimrc_persistent = 1
+let g:localvimrc_name = [".vimrc"]

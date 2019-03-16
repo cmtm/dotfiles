@@ -11,10 +11,14 @@ ZSH_THEME="agnoster"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vi="vim"
-alias mkdir="mkdir -p -v"
+alias igit="git --no-pager"
 alias info="info --vi-keys"
-alias trsh='mv --target-directory=$HOME/trash'
+alias mkdir="mkdir -p -v"
+alias trsh="mv --target-directory=$HOME/trash"
+alias vi="vim"
+alias gt="gnome-terminal"
+
+alias pastebin="/google/src/head/depot/eng/tools/pastebin"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -36,7 +40,7 @@ alias trsh='mv --target-directory=$HOME/trash'
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -58,16 +62,11 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-    archlinux
     vi-mode
     git
-    git-extras
     fasd
-    colored-man
+    colored-man-pages
     common-aliases
-    python
-    systemd
-    sudo
     last-working-dir
     history-substring-search
 )
@@ -84,12 +83,13 @@ if [[ -f ~/.dir_colors ]] ; then
     eval $(dircolors -b ~/.dir_colors)
 fi
 
+PATH=$PATH:~/depot_tools:~/bin
+umask 022
+
+setopt no_share_history
+setopt no_inc_append_history
+setopt inc_append_history_time
+setopt hist_find_no_dups
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-if [[ $TERM == xterm-termite ]]; then
-  . /etc/profile.d/vte.sh
-  __vte_osc7
-fi
