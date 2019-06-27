@@ -25,3 +25,5 @@
     insteadOf = git://
 [pull]
 	ff = only
+[color]
+	ui = auto
