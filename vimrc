@@ -1,52 +1,78 @@
-runtime! archlinux.vim
 let mapleader=","
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-filetype off                   " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Default in nvim, but not in vim
+if !has('nvim')
+  set nocompatible
+  set autoindent
+  " set autoread ?
+  set background=dark
+  set backspace=indent,eol,start
+  " Save your backups to a less annoying place than the current directory.
+  " If you have .vim-backup in the current directory, it'll use that.
+  " Otherwise it saves it to ~/.vim/backup or . if all else fails.
+  if isdirectory($HOME . '/.vim/backup') == 0
+      :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+  endif
+  set backupdir=~/.vim/backup/,.
+  set belloff=all
+  " set complete?
+  " Save your swp files to a less annoying place than the current directory.
+  if isdirectory($HOME . '/.vim/swap') == 0
+    :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+  endif
+  set directory=~/.vim/swap//
+  set encoding=utf-8
+  set formatoptions=tcqj
+  " set fillchars?
+  set nofsync
+  set history=10000
+  set hlsearch
+  set incsearch
+  set laststatus=2
+  set listchars="tab:> ,trail:-,nbsp:+"
+  set nrformats=bin,hex
+  set ruler
+  set shortmess=filnxtToOF
+  set showcmd
+  set sidescroll=1
+  set smarttab
+  set tabpagemax=50
+  set tags=./tags;,tags
+  set ttimeoutlen=50
+  set ttyfast
+  if isdirectory($HOME . '/.vim/undo') == 0
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+  set undodir=~/.vim/undo//
+  set viminfofile=~/.vim/viminfo
+  set wildmenu
+  set wildoptions=tagfile
+endif
 
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/Vundle.vim'
 
-" My Bundles here:
+call plug#begin('~/.vim/plugged')
 "
-" original repos on github
-Plugin 'tpope/vim-fugitive'
-Plugin 'majutsushi/tagbar'
-Plugin 'terryma/vim-smooth-scroll'
-" Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'mileszs/ack.vim'
-Plugin 'mbbill/undotree'
-Plugin 'sukima/xmledit'
-Plugin 'xolox/vim-misc'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'embear/vim-localvimrc'
-
-call vundle#end()
-
-filetype plugin indent on     " required!
+Plug 'altercation/vim-colors-solarized'
+Plug 'embear/vim-localvimrc'
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'michaeljsmith/vim-indent-object'
+" Plug 'mileszs/ack.vim'
+Plug 'powerline/powerline'
+Plug 'sukima/xmledit'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'tpope/vim-fugitive'
+Plug 'xolox/vim-misc'
+call plug#end()
 
 set t_Co=256
-syntax on
-let g:rehash256 = 1
 
-set background=dark
 colorscheme solarized
-"set background=dark
 "
 let g:tagbar_sort = 0
 let g:powerline_pycmd = "py3"
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
 set backup        " keep a backup file
-set history=1000
-set ruler        " show the cursor position all the time
-set showcmd        " display incomplete commands
 
 set confirm
 
@@ -65,16 +91,7 @@ if has('mouse')
     set mouse=a
 endif
 
-" Remove delay when leaving insert move
-if ! has('gui_running')
-    set ttimeoutlen=10
-    augroup FastEscape
-        autocmd!
-        au InsertEnter * set timeoutlen=0
-        au InsertLeave * set timeoutlen=1000
-    augroup END
-endif
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 if has("autocmd")
     augroup vimrcEx
@@ -96,9 +113,6 @@ if has("autocmd")
         au WinLeave * setlocal nocursorline
         au WinLeave * setlocal nocursorcolumn
     augroup END
-
-else
-    set autoindent        " always set autoindenting on
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -111,39 +125,27 @@ endif
 
 
 " My stuff
-set wildmenu
-set wildignorecase
-set wildmode=longest,list:longest
+set clipboard=unnamedplus
 set cursorline
-set virtualedit=block
-set ttyfast
-set laststatus=2
-set scrolloff=7
-set sidescrolloff=5
-set number
-set ignorecase
-set incsearch        " do incremental searching
-set showmatch
-set smartcase
-set hidden
-set nowrap
-set gdefault
 set expandtab
-set tabstop=8
-set shiftwidth=4
-set smarttab
+set gdefault
+set hidden
+set ignorecase
+set nowrap
+set number
+set scrolloff=7
 set shiftround
-set clipboard=unnamedplus,autoselect
-
-set tags=./tags;/,tags,~/lc/tags
-set path=.
-
-set nrformats-=octal
-
-" Disable output and VCS files
+set shiftwidth=4
+set showmatch
+set sidescrolloff=5
+set smartcase
+set undofile
+set virtualedit=block
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
-" Disable archive files
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignorecase
+" revisit wildmode
+set wildmode=longest,list:longest
 
 nnoremap <F8> :TagbarToggle<CR> 
 nnoremap <F5> :UndotreeToggle<cr>
@@ -151,15 +153,10 @@ nnoremap <F5> :UndotreeToggle<cr>
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap <silent> <leader>tw :set wrap!<CR>:set wrap?<CR>
+nnoremap <silent> <leader>w :set wrap!<CR>:set wrap?<CR>
 nnoremap <silent> <leader>N  :set relativenumber!<CR>
-nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>l :/\%>80v.\+<cr>
-" following 3 maps replaced by smooth scroll
-" nnoremap <space> <C-d>
-" nnoremap <S-Space> <C-u>
-" nnoremap <BS> <C-u>
 
 nnoremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1, 4)<CR>
 nnoremap <silent> <S-space> :call smooth_scroll#up(&scroll, 1, 4)<CR>
@@ -173,9 +170,6 @@ nnoremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1, 8)<CR>
 
 runtime macros/matchit.vim
 
-set splitbelow
-set splitright
-
 noremap <c-j> <c-w><c-w>
 noremap <c-k> <c-w><s-w>
 noremap <c-l> :vertical resize -7<CR>
@@ -183,49 +177,7 @@ noremap <c-h> :vertical resize +7<CR>
 nnoremap <s-h> <C-w><
 nnoremap <s-l> <C-w>>
 
-
-
-" Save your backups to a less annoying place than the current directory.
-" If you have .vim-backup in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/backup or . if all else fails.
-if isdirectory($HOME . '/.vim/backup') == 0
-    :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
-endif
-set backupdir-=.
-set backupdir+=.
-set backupdir-=~/
-set backupdir^=~/.vim/backup/
-set backupdir^=./.vim-backup/
-set backup
-
-" Save your swp files to a less annoying place than the current directory.
-" If you have .vim-swap in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/swap, ~/tmp or .
-if isdirectory($HOME . '/.vim/swap') == 0
-  :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
-endif
-set directory=./.vim-swap//
-set directory+=~/.vim/swap//
-set directory+=~/tmp//
-set directory+=.
-
 autocmd SwapExists * let v:swapchoice = "o"
-
-" viminfo stores the the state of your previous editing session
-set viminfo+=n~/.vim/viminfo
-
-if exists("+undofile")
-  " undofile - This allows you to use undos after exiting and restarting
-  " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
-  " :help undo-persistence
-  " This is only present in 7.3+
-  if isdirectory($HOME . '/.vim/undo') == 0
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-  endif
-  set undodir=./.vim-undo//
-  set undodir+=~/.vim/undo//
-  set undofile
-endif
 
 let g:localvimrc_persistent = 1
 let g:localvimrc_name = [".vimrc"]

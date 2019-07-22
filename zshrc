@@ -15,7 +15,7 @@ alias igit="git --no-pager"
 alias info="info --vi-keys"
 alias mkdir="mkdir -p -v"
 alias trsh="mv --target-directory=$HOME/trash"
-alias vi="vim"
+alias vi="nvim"
 alias gt="gnome-terminal"
 
 alias pastebin="/google/src/head/depot/eng/tools/pastebin"
