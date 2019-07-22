@@ -83,7 +83,8 @@ if [[ -f ~/.dir_colors ]] ; then
     eval $(dircolors -b ~/.dir_colors)
 fi
 
-PATH=$PATH:~/depot_tools:~/bin:~/.cargo/bin:~/work/depot_tools
+PATH=$PATH:~/depot_tools:~/bin:$HOME/.cargo/bin
+
 umask 022
 
 setopt no_share_history
