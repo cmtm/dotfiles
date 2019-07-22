@@ -49,20 +49,24 @@ if !has('nvim')
   set wildoptions=tagfile
 endif
 
-
 call plug#begin('~/.vim/plugged')
 "
 Plug 'altercation/vim-colors-solarized'
+Plug 'easymotion/vim-easymotion'
 Plug 'embear/vim-localvimrc'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'michaeljsmith/vim-indent-object'
-" Plug 'mileszs/ack.vim'
-Plug 'powerline/powerline'
+Plug 'rust-lang/rust.vim'
 Plug 'sukima/xmledit'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-syntastic/syntastic'
 Plug 'xolox/vim-misc'
+Plug 'yggdroot/indentline'
 call plug#end()
 
 set t_Co=256
@@ -70,7 +74,7 @@ set t_Co=256
 colorscheme solarized
 "
 let g:tagbar_sort = 0
-let g:powerline_pycmd = "py3"
+let g:airline_powerline_fonts = 1
 
 set backup        " keep a backup file
 
@@ -146,6 +150,16 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignorecase
 " revisit wildmode
 set wildmode=longest,list:longest
+
+" Syntastic config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 nnoremap <F8> :TagbarToggle<CR> 
 nnoremap <F5> :UndotreeToggle<cr>
