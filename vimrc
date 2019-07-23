@@ -69,12 +69,12 @@ Plug 'xolox/vim-misc'
 Plug 'yggdroot/indentline'
 call plug#end()
 
-set t_Co=256
 
 colorscheme solarized
-"
+
 let g:tagbar_sort = 0
 let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
 
 set backup        " keep a backup file
 
@@ -90,12 +90,9 @@ noremap Q gq
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
-" In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
     set mouse=a
 endif
-
-" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 if has("autocmd")
     augroup vimrcEx
@@ -194,4 +191,3 @@ nnoremap <s-l> <C-w>>
 autocmd SwapExists * let v:swapchoice = "o"
 
 let g:localvimrc_persistent = 1
-let g:localvimrc_name = [".vimrc"]
