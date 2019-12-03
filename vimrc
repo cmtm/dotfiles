@@ -1,5 +1,7 @@
 let mapleader=","
 
+source /usr/share/vim/google/google.vim
+
 " Default in nvim, but not in vim
 if !has('nvim')
   set nocompatible
@@ -64,7 +66,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 Plug 'xolox/vim-misc'
 Plug 'yggdroot/indentline'
 call plug#end()

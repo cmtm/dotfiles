@@ -1,7 +1,7 @@
 [core]
     pager = less -M -#10
 [user]
-    email = chris.morin2@gmail.com
+    email = cmtm@google.com
     name = Chris Morin
 [diff]
     tool = meld
@@ -24,11 +24,41 @@
     default = simple
 [http]
     sslVerify = false
-[url "http://"]
-    insteadOf = git://
+    cookiefile = /usr/local/google/home/cmtm/.gitcookies
+# [url "http://"]
+#     insteadOf = git://
 [pull]
     ff = only
 [color]
     ui = auto
 [pager]
     branch = false
+
+[rerere]
+    enabled=true
+
+[credential]
+    helper = corpsso
+
+[url "persistent-https://android.git.corp.google.com"]
+    insteadof = https://android.googlesource.com
+[url "persistent-https://android.git.corp.google.com"]
+    insteadof = persistent-https://android.googlesource.com
+[url "persistent-https://android-review.git.corp.google.com"]
+    insteadof = https://android-review.googlesource.com
+[url "persistent-https://googleplex-android.git.corp.google.com"]
+    insteadof = https://googleplex-android.googlesource.com
+[url "persistent-https://googleplex-android.git.corp.google.com"]
+    insteadof = persistent-https://googleplex-android.googlesource.com
+[url "persistent-https://googleplex-android-review.git.corp.google.com"]
+    insteadof = https://googleplex-android-review.googlesource.com
+[url "persistent-https://partner-android.git.corp.google.com"]
+    insteadof = https://partner-android.googlesource.com
+[url "persistent-https://partner-android.git.corp.google.com"]
+    insteadof = persistent-https://partner-android.googlesource.com
+[url "persistent-https://partner-android-review.git.corp.google.com"]
+    insteadof = https://partner-android-review.googlesource.com
+[url "persistent-https://chrome-internal.git.corp.google.com"]
+    insteadof = https://chrome-internal.googlesource.com
+# [url "persistent-https://chromium.git.corp.google.com"]
+#     insteadof = https://chromium.googlesource.com

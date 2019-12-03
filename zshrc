@@ -18,6 +18,8 @@ alias trsh="mv --target-directory=$HOME/trash"
 alias vi="nvim"
 alias gt="gnome-terminal"
 
+alias hgl="hg citc -l"
+alias ic="hg icdiff"
 alias pastebin="/google/src/head/depot/eng/tools/pastebin"
 
 # Set to this to use case-sensitive completion
@@ -92,6 +94,24 @@ setopt no_inc_append_history
 setopt inc_append_history_time
 setopt hist_find_no_dups
 
+source /etc/bash_completion.d/g4d
+
+function bb() {
+  if [[ $PWD =~ '(.*)/blaze-bin(.*)' ]]; then
+    cd "${match[1]}${match[2]}"
+  else
+    cd "${PWD/\/google3//google3/blaze-bin}"
+  fi
+}
+
+function bgf() {
+  if [[ $PWD =~ '(.*)/blaze-genfiles(.*)' ]]; then
+    cd "${match[1]}${match[2]}"
+  else
+    cd "${PWD/\/google3//google3/blaze-genfiles}"
+  fi
+}
+
 function up() {
     # default to 1
     declare -i d=${@:-1};
@@ -100,3 +120,4 @@ function up() {
     # remove last d directories from pwd, append "/" in case result is empty
     cd "$(pwd | sed -E 's;(/[^/]*){0,'$d'}$;;')/";
 }
+
