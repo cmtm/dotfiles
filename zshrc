@@ -92,5 +92,11 @@ setopt no_inc_append_history
 setopt inc_append_history_time
 setopt hist_find_no_dups
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+function up() {
+    # default to 1
+    declare -i d=${@:-1};
+    # ensure non-negative
+    (($d < 0)) && (>&2 echo "up: Error: negative value provided") && return 1;
+    # remove last d directories from pwd, append "/" in case result is empty
+    cd "$(pwd | sed -E 's;(/[^/]*){0,'$d'}$;;')/";
+}
