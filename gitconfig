@@ -22,10 +22,6 @@
     root = rev-parse --show-toplevel
 [push]
     default = simple
-[http]
-    sslVerify = false
-[url "http://"]
-    insteadOf = git://
 [pull]
     ff = only
 [color]
