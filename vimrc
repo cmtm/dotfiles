@@ -7,13 +7,6 @@ if !has('nvim')
   " set autoread ?
   set background=dark
   set backspace=indent,eol,start
-  " Save your backups to a less annoying place than the current directory.
-  " If you have .vim-backup in the current directory, it'll use that.
-  " Otherwise it saves it to ~/.vim/backup or . if all else fails.
-  if isdirectory($HOME . '/.vim/backup') == 0
-      :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
-  endif
-  set backupdir=~/.vim/backup/,.
   set belloff=all
   " set complete?
   " Save your swp files to a less annoying place than the current directory.
@@ -50,21 +43,25 @@ if !has('nvim')
 endif
 
 call plug#begin('~/.vim/plugged')
-"
+
 Plug 'altercation/vim-colors-solarized'
+Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'embear/vim-localvimrc'
-Plug 'majutsushi/tagbar'
+Plug 'leafgarland/typescript-vim'
 Plug 'mbbill/undotree'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'preservim/tagbar'
+Plug 'psliwka/vim-smoothie'
 Plug 'rust-lang/rust.vim'
-Plug 'sukima/xmledit'
-Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
+Plug 'vmchale/just-vim'
 Plug 'xolox/vim-misc'
 Plug 'yggdroot/indentline'
 call plug#end()
@@ -76,6 +73,10 @@ let g:tagbar_sort = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 
+if isdirectory($HOME . '/.vim/backup') == 0
+    :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+endif
+set backupdir=~/.vim/backup/,.
 set backup        " keep a backup file
 
 set confirm
@@ -126,7 +127,7 @@ endif
 
 
 " My stuff
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set cursorline
 set expandtab
 set gdefault
@@ -149,16 +150,16 @@ set wildignorecase
 set wildmode=longest,list:longest
 
 " Syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-nnoremap <F8> :TagbarToggle<CR> 
+nnoremap <F8> :TagbarToggle<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 
 nnoremap j gj
@@ -169,15 +170,7 @@ nnoremap <silent> <leader>N  :set relativenumber!<CR>
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>l :/\%>80v.\+<cr>
 
-nnoremap <silent> <c-u> :call smooth_scroll#up(&scroll, 1, 4)<CR>
-nnoremap <silent> <S-space> :call smooth_scroll#up(&scroll, 1, 4)<CR>
-nnoremap <silent> <BS> :call smooth_scroll#up(&scroll, 1, 4)<CR>
-
-nnoremap <silent> <c-d> :call smooth_scroll#down(&scroll, 1, 4)<CR>
-nnoremap <silent> <space> :call smooth_scroll#down(&scroll, 1, 4)<CR>
-
-nnoremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 1, 8)<CR>
-nnoremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 1, 8)<CR>
+nnoremap <silent> <space> <cmd>call smoothie#downwards() <CR>
 
 runtime macros/matchit.vim
 
