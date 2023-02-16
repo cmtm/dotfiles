@@ -17,8 +17,9 @@ alias mkdir="mkdir -p -v"
 alias trsh="mv --target-directory=$HOME/trash"
 alias vi="nvim"
 alias gt="gnome-terminal"
+alias -g lswt="~/lightsource-worktrees"
 
-alias pastebin="/google/src/head/depot/eng/tools/pastebin"
+
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -62,6 +63,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
+    aws
     vi-mode
     git
     fasd
@@ -83,14 +85,16 @@ if [[ -f ~/.dir_colors ]] ; then
     eval $(dircolors -b ~/.dir_colors)
 fi
 
-PATH=$PATH:~/depot_tools:~/bin:$HOME/.cargo/bin
+export DENO_INSTALL="/home/chris/.deno"
+PATH=$PATH:~/depot_tools:~/bin:$HOME/.cargo/bin:$DENO_INSTALL/bin
 
 umask 022
 
-setopt no_share_history
-setopt no_inc_append_history
+#setopt no_share_history
+#setopt no_inc_append_history
 setopt inc_append_history_time
 setopt hist_find_no_dups
+setopt hist_reduce_blanks
 
 function up() {
     # default to 1
@@ -100,3 +104,7 @@ function up() {
     # remove last d directories from pwd, append "/" in case result is empty
     cd "$(pwd | sed -E 's;(/[^/]*){0,'$d'}$;;')/";
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
