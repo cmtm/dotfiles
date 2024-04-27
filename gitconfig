@@ -1,7 +1,7 @@
 [core]
     pager = less -M -#10
 [user]
-    email = chris.morin2@gmail.com
+    email = chris@lightsource.ai
     name = Chris Morin
 [diff]
     tool = meld
@@ -28,3 +28,9 @@
     ui = auto
 [pager]
     branch = false
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
