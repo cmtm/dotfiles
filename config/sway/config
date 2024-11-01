@@ -68,7 +68,7 @@ output DP-2 pos 3840 0
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "type:keyboard" {
-    xkb_options caps:swapescape
+    xkb_options caps:swapescape,altwin:swap_alt_win
 }
 
 ### Key bindings
@@ -225,6 +225,7 @@ mouse_warping none
 
 smart_borders on
 default_border normal 6
+client.focused #ee4b2b #ee4b2b #ffffff #2ecc71 #ee4b2b
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
