@@ -1,0 +1,10 @@
+[user]
+name = "Chris Morin"
+email = "chris@lightsource.ai"
+
+[ui]
+default-command = "log"
+diff-editor = ":builtin"
+
+[template-aliases]
+'format_timestamp(timestamp)' = 'timestamp.ago()'

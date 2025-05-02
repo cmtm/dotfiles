@@ -655,4 +655,8 @@ alias la = ls -a
 alias lal = ls -la
 alias v = nvim
 
-use ~/.cache/starship/init.nu
+mkdir ($nu.data-dir | path join "vendor/autoload")
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+use ~/.config/nushell/bash-env.nu
+use ~/.config/nushell/completions-jj.nu
+

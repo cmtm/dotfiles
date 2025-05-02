@@ -38,11 +38,10 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
+$env.EDITOR = "nvim"
+
 use std "path add"
-path add ~/bin .cargo/bin ~/.deno/bin
+path add ~/bin .cargo/bin ~/.deno/bin ~/.local/bin
 
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
-
-mkdir ~/.cache/starship
-starship init nu | save -f ~/.cache/starship/init.nu
