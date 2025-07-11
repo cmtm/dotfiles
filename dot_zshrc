@@ -115,3 +115,10 @@ function up() {
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 eval "$(gh copilot alias -- zsh)"
+
+# bun completions
+[ -s "/home/chris/.bun/_bun" ] && source "/home/chris/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
