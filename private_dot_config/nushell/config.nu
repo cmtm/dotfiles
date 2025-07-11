@@ -654,6 +654,7 @@ alias ll = ls -l
 alias la = ls -a
 alias lal = ls -la
 alias v = nvim
+alias wt = wezterm start --cwd (pwd)
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
