@@ -67,7 +67,7 @@ output HDMI-A-1 pos 3840 0
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-input "type:keyboard" {
+input "10730:32778:Kinesis_Kinesis_Freestyle2_PC_-_KB800_Keyboard" {
     xkb_options caps:swapescape,altwin:swap_alt_win
 }
 
@@ -85,7 +85,7 @@ input "type:keyboard" {
 
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+Alt+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -98,10 +98,13 @@ input "type:keyboard" {
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Alt+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Alt+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Lock screen
+    bindsym $mod+Alt+s exec swaylock
 
 bindsym $mod+p exec grimshot save area - | wl-copy
 #
@@ -118,16 +121,16 @@ bindsym $mod+p exec grimshot save area - | wl-copy
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    # Move the focused window with the same, but add Alt
+    bindsym $mod+Alt+$left move left
+    bindsym $mod+Alt+$down move down
+    bindsym $mod+Alt+$up move up
+    bindsym $mod+Alt+$right move right
     # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+Alt+Left move left
+    bindsym $mod+Alt+Down move down
+    bindsym $mod+Alt+Up move up
+    bindsym $mod+Alt+Right move right
 #
 # Workspaces:
 #
@@ -143,16 +146,16 @@ bindsym $mod+p exec grimshot save area - | wl-copy
     # bindsym $mod+9 workspace number 9
     # bindsym $mod+0 workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Alt+1 move container to workspace number 1
+    bindsym $mod+Alt+2 move container to workspace number 2
+    bindsym $mod+Alt+3 move container to workspace number 3
+    bindsym $mod+Alt+4 move container to workspace number 4
+    bindsym $mod+Alt+5 move container to workspace number 5
+    bindsym $mod+Alt+6 move container to workspace number 6
+    bindsym $mod+Alt+7 move container to workspace number 7
+    bindsym $mod+Alt+8 move container to workspace number 8
+    bindsym $mod+Alt+9 move container to workspace number 9
+    bindsym $mod+Alt+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
@@ -185,7 +188,7 @@ workspace 10 output HDMI-A-1
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Alt+space floating toggle
 
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
@@ -199,7 +202,7 @@ workspace 10 output HDMI-A-1
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Alt+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
