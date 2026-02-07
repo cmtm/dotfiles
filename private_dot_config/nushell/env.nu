@@ -41,7 +41,7 @@ $env.NU_PLUGIN_DIRS = [
 $env.EDITOR = "nvim"
 
 use std "path add"
-path add ~/bin .cargo/bin ~/.deno/bin ~/.local/bin ~/.bun/bin
+path add ~/bin .cargo/bin ~/.deno/bin ~/.local/bin ~/.bun/bin ~/go/bin
 
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')

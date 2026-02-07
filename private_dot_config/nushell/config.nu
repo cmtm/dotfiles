@@ -661,3 +661,20 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 use ~/.config/nushell/bash-env.nu
 use ~/.config/nushell/completions-jj.nu
 
+
+def --env awscreds [profile] {
+    ~/bin/awscreds $profile | bash-env | load-env
+}
+
+def --wrapped claude [...args] {
+    let claude_settings = { "CLAUDE_CODE_USE_BEDROCK": 1, "AWS_REGION":
+        "us-west-2", "ANTHROPIC_MODEL":
+        "us.anthropic.claude-opus-4-5-20251101-v1:0",
+        #"us.anthropic.claude-opus-4-6-v1",
+        "ANTHROPIC_SMALL_FAST_MODEL":
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL":
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0" }
+    let claude_env = (~/bin/awscreds "dev") | bash-env | merge $claude_settings
+    with-env $claude_env {~/.claude/local/claude ...$args}
+}

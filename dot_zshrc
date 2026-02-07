@@ -7,7 +7,7 @@ alias igit="git --no-pager"
 alias info="info --vi-keys"
 alias mkdir="mkdir -p -v"
 alias trsh="mv --target-directory=$HOME/trash"
-alias vi="nvim"
+alias v="nvim"
 alias gt="gnome-terminal"
 alias -g lswt="~/lightsource-worktrees"
 
@@ -123,4 +123,3 @@ eval "$(gh copilot alias -- zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias claude="/home/chris/.claude/local/claude"
